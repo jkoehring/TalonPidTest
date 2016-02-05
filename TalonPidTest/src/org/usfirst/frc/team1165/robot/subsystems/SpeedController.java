@@ -20,7 +20,7 @@ public class SpeedController extends ReportableSubsystem
 	public SpeedController()
 	{
 		speedController.configEncoderCodesPerRev(20);
-		//speedController.setPIDSourceType(pidSource);
+
 		speedController.setP(0.75);
 		speedController.setI(0.01);
 		speedController.setD(0.0);
