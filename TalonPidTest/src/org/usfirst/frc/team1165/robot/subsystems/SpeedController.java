@@ -4,6 +4,7 @@ import org.usfirst.frc.team1165.robot.commands.OperateSpeedControllerWithJoystic
 //import org.usfirst.frc.team1165.wpilibj.CANTalon;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,13 +20,15 @@ public class SpeedController extends ReportableSubsystem
 
 	public SpeedController()
 	{
+		speedController.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		speedController.configEncoderCodesPerRev(20);
 
 		speedController.setP(0.75);
 		speedController.setI(0.01);
 		speedController.setD(0.0);
 		
-		speedController.setCloseLoopRampRate(.1);
+		speedController.setCloseLoopRampRate(.01);
+		
 	}
 
 	public void initDefaultCommand()
@@ -37,6 +40,7 @@ public class SpeedController extends ReportableSubsystem
 
 	public void setThrottle(double speed)
 	{
+		speedController.setControlMode(TalonControlMode.PercentVbus.getValue());
 		speedController.set(speed);
 	}
 
@@ -48,14 +52,19 @@ public class SpeedController extends ReportableSubsystem
 
 	public void stopRpm()
 	{
-		speedController.set(0);
+		//speedController.set(0);
 		speedController.setControlMode(TalonControlMode.PercentVbus.getValue());
+	}
+
+	public void stopThrottle()
+	{
+		setThrottle(0);
 	}
 
 	@Override
 	public void report()
 	{
-		SmartDashboard.putNumber("Cur Throttle", speedController.get());
+		SmartDashboard.putNumber("Cur Value", speedController.get());
 		SmartDashboard.putNumber("Cur RPM", speedController.getSpeed());
 	}
 }

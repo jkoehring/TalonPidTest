@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1165.robot.commands.SetRpm;
 import org.usfirst.frc.team1165.robot.commands.SetThrottle;
 import org.usfirst.frc.team1165.robot.commands.StopRpm;
+import org.usfirst.frc.team1165.robot.commands.StopThrottle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -53,6 +54,7 @@ public class OI
 		SmartDashboard.putData(new SetRpm());
 		
 		SmartDashboard.putData(new StopRpm());
+		SmartDashboard.putData(new StopThrottle());
 	}
 	
 	public double getSpeedControllerSpeed()
